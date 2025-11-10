@@ -1,0 +1,36 @@
+&control
+    calculation = 'scf',
+    prefix = 'quartz',
+    pseudo_dir = './pseudos',
+    outdir = './tmp'
+/
+&system
+    ibrav = 0,
+    nat = 9,
+    ntyp = 2,
+    ecutwfc = 60,
+    ecutrho = 480,
+    occupations = 'fixed'
+/
+&electrons
+    conv_thr = 1.0d-8,
+    mixing_beta = 0.3
+/
+ATOMIC_SPECIES
+ Si  28.0855  Si.pbe-n-kjpaw_psl.1.0.0.UPF
+ O   15.9994  O.pbe-n-kjpaw_psl.1.0.0.UPF
+
+CELL_PARAMETERS angstrom
+# α-quartz hexagonal conventional cell (example, relax later)
+ 4.9134   0.0000   0.0000
+-2.4567   4.2540   0.0000
+ 0.0000   0.0000   5.4050
+
+ATOMIC_POSITIONS crystal
+# Placeholder fractional coords for α-quartz; refine via relax:
+ Si  x1  y1  z1
+ Si  x2  y2  z2
+ Si  x3  y3  z3
+ O   ...
+K_POINTS automatic
+ 6 6 6  0 0 0
