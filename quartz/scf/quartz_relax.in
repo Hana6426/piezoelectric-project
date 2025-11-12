@@ -1,4 +1,5 @@
 &control
+    restart_mode = 'restart',
     calculation = 'vc-relax',
     prefix      = 'quartz',
     pseudo_dir  = './pseudos',
