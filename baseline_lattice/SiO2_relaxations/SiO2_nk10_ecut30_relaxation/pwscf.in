@@ -1,0 +1,45 @@
+&CONTROL
+    calculation = 'vc-relax'
+    pseudo_dir = '/home/bond/Software/QE/qe-7.4.1/pseudo'
+    outdir = '/home/bond/piezoelectric-project/baseline_lattice/SiO2_relaxations/SiO2_nk10_ecut30_relaxation'
+    tstress = .true.
+    tprnfor = .true.
+    disk_io = 'none'
+/ 
+&SYSTEM
+    ecutwfc = 30
+    ecutrho = 240
+    input_dft = 'LDA'
+    ntyp = 2
+    nat = 9
+    ibrav = 0
+/ 
+&ELECTRONS
+    diagonalization = 'david'
+    mixing_beta = 0.7
+    conv_thr = 1e-07
+/ 
+&IONS
+    ion_dynamics = 'bfgs'
+/ 
+&CELL
+/ 
+K_POINTS {automatic}
+ 10 10 10  1 1 1
+ATOMIC_SPECIES
+  O 15.999 O.pz-rrkjus.UPF
+  Si 28.085 Si_r.upf
+CELL_PARAMETERS {angstrom}
+ 4.916 0.0 0.0
+ -2.4579999999999993 4.257380885004301 0.0
+ 0.0 0.0 5.405
+ATOMIC_POSITIONS {angstrom}
+  Si 1.30542 2.26105 0.00000
+  Si 2.30517 0.00000 1.80167
+  Si -1.15258 1.99633 3.60333
+  O 0.30738 1.75998 4.24234
+  O 0.78013 3.64359 0.63900
+  O -1.08751 3.11120 2.44067
+  O 1.37049 1.14618 1.16266
+  O 2.76538 2.49741 4.76600
+  O 3.23813 0.61379 2.96433

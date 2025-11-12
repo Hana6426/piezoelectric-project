@@ -1,0 +1,14 @@
+&inputph
+   prefix        = 
+   outdir        = './tmp'
+   tr2_ph        = 1.0d-14
+   ldisp         = .false.
+   nq1           = 1
+   nq2           = 1
+   nq3           = 1
+   amass(1)      = 69.723
+   amass(2)      = 74.92160
+   epsil         = .true.
+   trans         = .true.
+   fildyn        = 'matdyn_G'
+/
