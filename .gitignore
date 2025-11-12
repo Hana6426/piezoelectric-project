@@ -1,20 +1,9 @@
-# Quantum ESPRESSO / DFT heavy files
-*.out
-*.wfc
-*.igk
-*.dat
-*.tmp
+tmp/
+tmp_*/
 *.save/
+*.wfc
 *.xml
-*.cube
-*.json
-
-# Logs & misc
-*.log
-slurm-*
-nohup.out
-
-# Editor / system junk
+*.dat
+*.tar.gz
+*.chk
 .DS_Store
-*.swp
-pseudos/
