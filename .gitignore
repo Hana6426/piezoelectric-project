@@ -17,3 +17,4 @@ nohup.out
 # Editor / system junk
 .DS_Store
 *.swp
+pseudos/
