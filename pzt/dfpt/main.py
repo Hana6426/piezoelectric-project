@@ -29,7 +29,7 @@ def run_scf(nk, ecut, runpath):
     }
     struc = make_Pb_Ti_O_struc()
     kpts = Kpoints(gridsize=[nk, nk, nk], option="automatic", offset=True)
-    dirname = "PbTiO3_scf".format(nk)
+    dirname = "PbTiO3_scf"
     runpath = Dir(path=os.path.join("/home/bond/piezoelectric-project/pzt/dfpt", dirname))
     input_params = PWscf_inparam(
         {
@@ -66,12 +66,9 @@ def run_scf(nk, ecut, runpath):
     output = parse_qe_pwscf_output(outfile=output_file)
     return output
 
-
-
-    import os
 import subprocess
 
-def run_qe_ph(
+def run_qe_ph( #DEPRECIATED
     runpath,
     ph_input_name="ph.in",
     ph_output_name="ph.out",
@@ -124,20 +121,33 @@ def run_qe_ph(
     if result.returncode != 0:
         raise RuntimeError(f"Ph.x calculation failed with return code {result.returncode}")
 
-    return ph_out_file
+    return ph_out_path
+
+
+def run_qe_ph(runpath, ph_input_name="ph.in", ph_output_name="ph.out", ncpu=1):
+    # Use the same command that works from terminal
+    ph_command = f'mpirun -np {ncpu} ph.x < {ph_input_name} > {ph_output_name}'
+    
+    result = subprocess.run(ph_command, shell=True, cwd=runpath.path)
+    return os.path.join(runpath.path, ph_output_name)
+
+
+def parse_ph_output(runpath, ph_output_name="ph.out"):
+    #read the ph.out file and extract the relevant tensors and matrices.
+    ph_out_path = os.path.join(runpath.path, ph_output_name)
+    if not os.path.exists(ph_out_path):
+        raise FileNotFoundError(f"Ph.x output file not found: {ph_out_path}")
+    
+    
 
 
 
-def extract_piezoelectric_tensor():
-    # Placeholder for piezoelectric tensor calculation
-    print("Extracting piezoelectric tensor...")
-    # Actual implementation would go here
-    piezo_tensor = np.zeros((3, 3))  # Example tensor
-    return piezo_tensor
+
+
 
 if __name__ == "__main__":
-    nk = 6  # k-point grid size
-    ecut = 50  # energy cutoff in Ry
+    nk = 8  # k-point grid size
+    ecut = 60  # energy cutoff in Ry
 
     #scf_output = run_scf(nk, ecut)
     runpath = Dir(path="/home/bond/piezoelectric-project/pzt/dfpt/PbTiO3_scf")
