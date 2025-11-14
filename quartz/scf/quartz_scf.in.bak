@@ -1,0 +1,42 @@
+&control
+    calculation = 'scf',
+    prefix      = 'quartz',
+    pseudo_dir = './pseudos',
+    outdir      = './tmp'
+/
+&system
+    ibrav      = 0,
+    nat        = 9,
+    ntyp       = 2,
+    ecutwfc    = 60,
+    ecutrho    = 480,
+    occupations= 'fixed',
+    input_dft = 'LDA'
+/
+&electrons
+    conv_thr   = 1.0d-8,
+    mixing_beta= 0.3
+/
+ATOMIC_SPECIES
+ Si  28.0855  Si.LDA-<whatever>.UPF
+ O   15.9994  O.LDA-<whatever>.UPF 
+
+CELL_PARAMETERS angstrom
+ 4.9134   0.0000   0.0000
+-2.4567   4.2540   0.0000
+ 0.0000   0.0000   5.4050
+
+ATOMIC_POSITIONS crystal #double check with Lucas's code
+ Si  0.4697  0.0000  0.0000
+ Si  0.0000  0.4697  0.6667
+ Si  0.5303  0.5303  0.3333
+ O   0.4133  0.2669  0.1188
+ O   0.7331  0.1464  0.4512
+ O   0.8536  0.5867  0.7855
+ O   0.5867  0.8536  0.2145
+ O   0.2669  0.4133  0.5488
+ O   0.1464  0.7331  0.8812
+
+K_POINTS automatic
+ 6 6 6  0 0 0
+
