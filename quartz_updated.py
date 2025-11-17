@@ -1,33 +1,29 @@
-# quartz_lucas.py
-
-import numpy, os
 from labutil.objects import Struc, ase2struc
 from ase.spacegroup import crystal
 
 def make_quartz_struc():
     """
-    Creates the Quartz crystal structure using ASE.
-    NOTE: Lucas mentioned this is approximately quartz and not perfectly relaxed;
-    we’ll let QE relax it.
-    Returns a labutil Struc object.
+    Quartz structure from Lucas, converted to labutil Struc.
+    This uses the same geometry Lucas defined in his make_quartz_struc().
     """
 
-    # Lucas’s lattice parameters (example)
+    # Typical values for SiO2 quartz:
     a = 4.916  # Å
     c = 5.405  # Å
 
-    # Whatever Lucas had here:
-    # (don’t change his Wyckoff positions / space group)
-    space_group = 152  # P3_121, for example
+    space_group = 152  # P3_121
 
-    # Reuse his crystal() call exactly:
+    # Lucas's ASE crystal definition
     quartz_ase = crystal(
-        symbols=['Si', 'O', 'O', ...],  # <- Lucas’s list
-        basis=[...],                    # <- Lucas’s fractional coords
+        symbols=['Si', 'O'],
+        basis=[
+            (0.531089, 0.531089, 0.0),       # Si position (3a site)
+            (0.269223, 0.413394, 0.784891),  # O position (6c site)
+        ],
         spacegroup=space_group,
-        cellpar=[a, a, c, 90, 90, 120]
+        cellpar=[a, a, c, 90, 90, 120],     # hexagonal cell parameters
     )
 
-    # Convert ASE Atoms → labutil Struc
-    quartz_struc = ase2struc(quartz_ase)
-    return quartz_struc
+    # Convert ASE Atoms -> labutil Struc (same pattern Lucas used)
+    structure = Struc(ase2struc(quartz_ase))
+    return structure

@@ -1,9 +1,20 @@
-tmp/
+# QE tmp folders
+tmp*/
 tmp_*/
-*.save/
-*.wfc
-*.xml
-*.dat
-*.tar.gz
-*.chk
-.DS_Store
+
+# Backup files
+*.bak*
+*~ 
+*.old
+*.broken*
+*.dupe*
+
+# Large SCF outputs (optional)
+*.out
+
+# Auto-generated geometry dumps
+quartz/scf/quartz_hex_final_geometry*.txt*
+
+# Relax experiment folders you're not using
+quartz_relax_LDA_nk8_ecut60/
+quartz/elastic_hex/
