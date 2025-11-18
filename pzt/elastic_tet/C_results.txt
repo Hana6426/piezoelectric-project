@@ -9,3 +9,9 @@ eps  = 2.0000e-03
 K = C11 + C12 = 442.388 GPa
 C11 (input)   = 310.920 GPa
 C12           = 131.468 GPa
+
+# Updated shear constants from ±0.2% strain (Voigt notation)
+# ecutwfc = 60 Ry, ecutrho = 480 Ry, nk = 8x8x8, LDA ultrasoft PPs
+
+C44 ≈ 87.0  GPa   # from eps_{yz} = ±0.002 (eps_p002_yz / eps_m002_yz)
+C66 ≈ 99.9  GPa   # from eps_{xy} = ±0.002 (eps_p002_xy / eps_m002_xy)
