@@ -18,3 +18,4 @@ quartz/scf/quartz_hex_final_geometry*.txt*
 # Relax experiment folders you're not using
 quartz_relax_LDA_nk8_ecut60/
 quartz/elastic_hex/
+pzt_save_backup.tar.gz

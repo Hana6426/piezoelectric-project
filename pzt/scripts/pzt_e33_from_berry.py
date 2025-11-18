@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 import os
-import xml.etree.ElementTree as ET
-
-RY_TO_EV = 13.605693009
-EV_TO_ME = 1000.0
+import re
 
 # Directories for the three Berry-phase runs
 runs = {
@@ -14,37 +11,39 @@ runs = {
 
 def get_Pz_from_xml(savedir):
     """
-    Parse QE data-file-schema.xml and return Pz (C/m^2).
-    We look for tags whose name contains 'polarization'.
-    We then assume the last such tag has 3 components: Px, Py, Pz.
+    Read QE data-file-schema.xml as plain text and extract the last
+    line containing 'polarization' with three numeric components.
+    Returns (Px, Py, Pz) in C/m^2.
     """
     xml_path = os.path.join(savedir, "data-file-schema.xml")
     if not os.path.isfile(xml_path):
         raise FileNotFoundError(f"No data-file-schema.xml in {savedir}")
 
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
+    with open(xml_path, "r") as f:
+        lines = f.readlines()
 
-    pol_elems = []
-    for elem in root.iter():
-        tag_lower = elem.tag.lower()
-        if "polarization" in tag_lower and elem.text is not None:
-            txt = elem.text.strip()
-            # Only keep entries that look like numbers
-            if any(c.isdigit() for c in txt):
-                pol_elems.append(elem)
+    candidate_lines = []
+    for line in lines:
+        low = line.lower()
+        # Be stricter: require the word "polarization", not just "polar"
+        if "polarization" in low and any(c.isdigit() for c in line):
+            candidate_lines.append(line.strip())
 
-    if not pol_elems:
-        raise RuntimeError(f"No polarization-like elements found in {xml_path}")
+    if not candidate_lines:
+        raise RuntimeError(f"No polarization-like lines found in {xml_path}")
 
-    # Take the last one (usually the final Berry-phase polarization)
-    last = pol_elems[-1]
-    comps = last.text.split()
-    if len(comps) < 3:
-        raise RuntimeError(f"Polarization element in {xml_path} does not have 3 components: {last.text}")
+    # Walk backwards through candidates until we find one with ≥3 numbers
+    for last in reversed(candidate_lines):
+        nums = re.findall(r"[-+]?\d+\.\d*(?:[eE][-+]?\d+)?", last)
+        if len(nums) >= 3:
+            Px, Py, Pz = [float(x) for x in nums[:3]]
+            return Px, Py, Pz
 
-    Px, Py, Pz = [float(x) for x in comps[:3]]
-    return Px, Py, Pz
+    # If we got here, none of the 'polarization' lines actually had numbers
+    raise RuntimeError(
+        f"Could not find a 'polarization' line with ≥3 floats in {xml_path}.\n"
+        f"Last candidate was:\n{candidate_lines[-1]}"
+    )
 
 # ---- main ----
 Pz = {}
@@ -63,7 +62,7 @@ Pz_0 = Pz["0"]
 e33 = (Pz_p - Pz_m) / (2.0 * eps)  # C/m^2 per unit strain
 
 print("\nFinite-difference e33 from Berry-phase polarization:")
-print(f"  Pz(0)    = {Pz_0: .6e} C/m^2")
-print(f"  Pz(+0.2%)= {Pz_p: .6e} C/m^2")
-print(f"  Pz(-0.2%)= {Pz_m: .6e} C/m^2")
+print(f"  Pz(0)     = {Pz_0: .6e} C/m^2")
+print(f"  Pz(+0.2%) = {Pz_p: .6e} C/m^2")
+print(f"  Pz(-0.2%) = {Pz_m: .6e} C/m^2")
 print(f"  e33 ≈ {e33: .6e} C/m^2")

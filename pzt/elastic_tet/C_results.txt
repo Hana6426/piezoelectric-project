@@ -1,2 +1,11 @@
 C11 (±0.2% xx, energy FD): 310.92 GPa
 C33 (±0.2% zz, energy FD): 322.64 GPa
+
+--- Biaxial ±0.2% xx+yy ---
+E0   = -333.76331702000 Ry
+Ep   = -333.76324852000 Ry
+Em   = -333.76328740000 Ry
+eps  = 2.0000e-03
+K = C11 + C12 = 442.388 GPa
+C11 (input)   = 310.920 GPa
+C12           = 131.468 GPa
