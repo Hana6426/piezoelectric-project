@@ -1,0 +1,7 @@
+PZT (tetragonal) C11 from ±0.2% xx strain (energy FD):
+  E0  = -333.76331702000 Ry
+  Ep  = -333.76328991000 Ry
+  Em  = -333.76330965000 Ry
+  V0  = 60.4360 Å^3
+  eps = 0.0020
+  C11 ≈ 310.92 GPa
