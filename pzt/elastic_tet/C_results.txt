@@ -1,0 +1,2 @@
+C11 (±0.2% xx, energy FD): 310.92 GPa
+C33 (±0.2% zz, energy FD): 322.64 GPa
