@@ -1,0 +1,41 @@
+&control
+  calculation = 'nscf',
+  prefix      = 'pzt_e33_p0.005',
+  outdir      = './tmp_pzt_e33_p0.005',
+  pseudo_dir  = './pseudos',
+  lberry      = .true.,
+  gdir        = 3,
+  nppstr      = 8
+/
+&system
+  ibrav    = 0,
+  nat      = 5,
+  ntyp     = 3,
+  ecutwfc  = 60,
+  ecutrho  = 480,
+  occupations = 'fixed',
+  input_dft  = 'LDA'
+/
+&electrons
+  conv_thr    = 1.0d-10,
+  mixing_beta = 0.3
+/
+ATOMIC_SPECIES
+ Pb  207.2   Pb.pz-d-van.UPF
+ Ti  47.867  Ti.pz-sp-van_ak.UPF
+ O   15.9994 O.pz-van_ak.UPF
+
+CELL_PARAMETERS (angstrom)
+   3.860676393   0.000000000   0.000000000
+   0.000000000   3.860676393   0.000000000
+   0.000000000   0.000000000   4.075067454435
+
+ATOMIC_POSITIONS (crystal)
+ Pb  0.0000000000  0.0000000000  -0.0005727455
+ Ti  0.5000000000  0.5000000000   0.5366443364
+ O   0.5000000000  0.5000000000   0.0993749155
+ O   0.5000000000  0.0000000000   0.6022767468
+ O   0.0000000000  0.5000000000   0.6022767468
+
+K_POINTS automatic
+  8 8 8  0 0 0
