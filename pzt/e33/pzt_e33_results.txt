@@ -1,6 +1,0 @@
-PZT (tetragonal) e33 from ±0.500% c-axis strain (Berry-phase P3 FD):
-  P3(+eps) =  1.3422520 C/m^2
-  P3(-eps) =  1.3438060 C/m^2
-  dP       = -0.0015540 C/m^2
-  eps      =  5.0000e-03
-  e33 ≈ -0.1554 C/m^2

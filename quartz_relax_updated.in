@@ -1,0 +1,37 @@
+&control
+  calculation = 'relax',
+  prefix      = 'quartz_hex',
+  outdir      = './tmp_quartz_hex',
+  pseudo_dir  = './pseudos',
+  tprnfor     = .true.,
+  tstress     = .true.,
+/
+&system
+  ibrav    = 0,
+  nat      = 9,
+  ntyp     = 2,
+  ecutwfc  = 60,
+  ecutrho  = 480,
+  occupations = 'fixed',
+  input_dft  = 'LDA',
+/
+&electrons
+  conv_thr    = 1.0d-8,
+  mixing_beta = 0.3,
+/
+&ions
+  ion_dynamics = 'bfgs',
+/
+ATOMIC_SPECIES
+  Si  28.0855  Si.pz-vbc.UPF
+  O   15.9994  O.pz-van_ak.UPF
+
+CELL_PARAMETERS (angstrom)
+  4.916   0.0000   0.0000
+ -2.458   4.2574   0.0000
+  0.0000  0.0000   5.4050
+
+ATOMIC_POSITIONS (angstrom)
+  (copy his 9 atomic positions here)
+K_POINTS automatic
+  10 10 10  1 1 1   ! your converged mesh
