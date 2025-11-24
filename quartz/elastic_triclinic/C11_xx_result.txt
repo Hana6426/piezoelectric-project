@@ -1,6 +1,0 @@
-Quartz (hex) C11 from ±0.2% xx strain (energy FD):
-  E0  = -216.94157918 Ry
-  Ep  = -216.94165508 Ry
-  Em  = -216.94143410 Ry
-  V0  = 112.3577 Å^3
-  C11 ≈ 335.54 GPa
