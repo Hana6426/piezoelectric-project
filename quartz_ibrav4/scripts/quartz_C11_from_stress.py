@@ -1,16 +1,7 @@
 #!/usr/bin/env python3
 """
 Compute C11 for quartz from ± strain SCF runs using stress output.
-
-Assumes the files quartz_scf_eps+0.005.out and quartz_scf_eps-0.005.out
-live in the current working directory and contain a block like:
-
-  total   stress  (Ry/bohr**3)                   (kbar)
-   ... ... ...    sigma_xx  sigma_yy  sigma_zz
-
-We grab sigma_xx in kbar for +eps and -eps and use:
-
-    C11 = [sigma_xx(+eps) - sigma_xx(-eps)] / (2 * eps)
+Also saves the result into quartz_ibrav4/results/C11_result.txt
 """
 
 import pathlib
@@ -29,12 +20,8 @@ def get_sigma_xx_kbar(outfile: str) -> float:
 
     for i, line in enumerate(lines):
         if "total   stress" in line and "(kbar)" in line:
-            # Next line has three stress components in Ry/bohr^3 and kbar
-            # Example:
-            #  0.00002245  -0.00005723   0.00005356            3.30  -8.42   7.88
             row = lines[i + 1]
             parts = row.split()
-            # Last 3 entries are the kbar components: sigma_xx, sigma_yy, sigma_zz
             sigma_xx_kbar = float(parts[-3])
             return sigma_xx_kbar
 
@@ -48,18 +35,34 @@ def main():
     sigma_plus = get_sigma_xx_kbar(plus_file)
     sigma_minus = get_sigma_xx_kbar(minus_file)
 
-    print(f"sigma_xx(+eps) = {sigma_plus:.4f} kbar")
-    print(f"sigma_xx(-eps) = {sigma_minus:.4f} kbar")
-    print(f"eps = {EPS:.4f}")
-
     C11_kbar = (sigma_plus - sigma_minus) / (2 * EPS)
     C11_GPa = C11_kbar * 0.1  # 1 kbar = 0.1 GPa
 
+    # Print results
+    print(f"sigma_xx(+eps) = {sigma_plus:.6f} kbar")
+    print(f"sigma_xx(-eps) = {sigma_minus:.6f} kbar")
+    print(f"eps = {EPS:.6f}")
     print()
-    print(f"C11 ≈ {C11_kbar:8.2f} kbar")
-    print(f"C11 ≈ {C11_GPa:8.2f} GPa")
+    print(f"C11 = {C11_kbar:.6f} kbar")
+    print(f"C11 = {C11_GPa:.6f} GPa")
+
+    # Save to file
+    results_dir = pathlib.Path("quartz_ibrav4/results")
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    outfile = results_dir / "C11_result.txt"
+    with outfile.open("w") as f:
+        f.write("Quartz C11 finite-strain result\n")
+        f.write("--------------------------------\n")
+        f.write(f"epsilon = {EPS}\n")
+        f.write(f"sigma_xx(+eps) = {sigma_plus:.6f} kbar\n")
+        f.write(f"sigma_xx(-eps) = {sigma_minus:.6f} kbar\n")
+        f.write("\n")
+        f.write(f"C11 = {C11_kbar:.6f} kbar\n")
+        f.write(f"C11 = {C11_GPa:.6f} GPa\n")
+
+    print(f"\nSaved results to {outfile}")
 
 
 if __name__ == "__main__":
     main()
-

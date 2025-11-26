@@ -1,0 +1,8 @@
+Quartz C11 finite-strain result
+--------------------------------
+epsilon = 0.005
+sigma_xx(+eps) = -12.860000 kbar
+sigma_xx(-eps) = 20.260000 kbar
+
+C11 = -3312.000000 kbar
+C11 = -331.200000 GPa
