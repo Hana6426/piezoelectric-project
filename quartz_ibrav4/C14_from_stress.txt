@@ -1,5 +1,0 @@
-Quartz C14 from stress (yz shear, eps = ±0.005)
-  sigma_xx(+eps) =  2.76600000e-05 Ry/bohr^3
-  sigma_xx(-eps) =  2.01200000e-05 Ry/bohr^3
-  d sigma_xx / d eps =  7.54000000e-04 Ry/bohr^3
-  C14 ≈  11.0917 GPa
