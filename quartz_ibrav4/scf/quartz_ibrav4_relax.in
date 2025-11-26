@@ -1,0 +1,48 @@
+&control
+  calculation = 'vc-relax',
+  prefix      = 'quartz_ibrav4',
+  outdir      = './tmp_quartz_ibrav4',
+  pseudo_dir  = './pseudos',
+  tstress     = .true.,
+  tprnfor     = .true.,
+/
+&system
+  ibrav      = 4,
+  celldm(1)  = 9.2789,
+  celldm(3)  = 1.1065,
+  nat        = 9,
+  ntyp       = 2,
+  ecutwfc    = 60,
+  ecutrho    = 480,
+  occupations= 'fixed',
+  input_dft  = 'LDA',
+/
+&electrons
+  conv_thr   = 1.0d-8,
+  mixing_beta= 0.3,
+/
+&ions
+  ion_dynamics = 'bfgs',
+/
+&cell
+  cell_dynamics = 'bfgs',
+  cell_dofree   = 'ibrav',
+/
+ATOMIC_SPECIES
+  Si  28.0855  Si.pz-vbc.UPF
+  O   15.9994  O.pz-van_ak.UPF
+
+ATOMIC_POSITIONS (crystal)
+  Si   0.531089   0.531089   0.000000
+  Si   0.468911   0.000000   0.333333
+  Si   0.000000   0.468911   0.666667
+
+  O    0.269223   0.413394   0.784891
+  O    0.586606   0.855829   0.215109
+  O    0.144171   0.730829   0.549891
+  O    0.730777   0.586606   0.215109
+  O    0.413394   0.144171   0.549891
+  O    0.269223   0.269223   0.784891
+
+K_POINTS automatic
+ 6 6 6  0 0 0
