@@ -1,0 +1,16 @@
+Quartz e11 Berry-phase NSCF results (gdir = 1, nppstr = 8)
+
+eps = 0.000:
+  Ionic Phase:       0.26486
+  Electronic Phase: -0.37475
+  TOTAL PHASE:      -0.10989  (mod 2)
+
+eps = +0.005:
+  Ionic Phase:       0.26486
+  Electronic Phase: -0.70597
+  TOTAL PHASE:      -0.44111  (mod 2)
+
+eps = -0.005:
+  Ionic Phase:       0.26486
+  Electronic Phase: -0.43161
+  TOTAL PHASE:      -0.16675  (mod 2)
