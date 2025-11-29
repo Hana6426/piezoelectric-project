@@ -1,0 +1,17 @@
+Quartz e11 — Unrelaxed Berry-phase finite difference (±0.5%)
+-----------------------------------------------------------
+P(0%)       = -0.0778609 C/m^2
+P(+0.5%)    = -0.3125410 C/m^2
+P(-0.5%)    = -0.1181499 C/m^2
+
+Central difference:
+e11 ≈ -3.09 C/m^2
+
+Forward difference:
+e11 ≈ -7.47 C/m^2
+
+Notes:
+- These values are unphysically large for quartz (expected ~0.17 C/m^2).
+- Structure was not allowed to relax under strain.
+- ±0.5% strain is too large for quartz’s linear-response regime.
+- Likely strong nonlinearity + polarization branch issues.
