@@ -1,0 +1,19 @@
+Quartz e11 — Fully relaxed Berry-phase finite difference (±0.5%)
+---------------------------------------------------------------
+P(0%)          = -0.0778609 C/m^2
+P(+0.5% rel.)  =  0.1592388 C/m^2
+P(-0.5% rel.)  = -0.4606871 C/m^2
+
+Central difference:
+e11 ≈ (0.1592388 - (-0.4606871)) / 0.01 = 61.99 C/m^2
+
+Notes:
+- Result is *extremely* unphysical (off by ~300×).
+- Cause: ionic relaxation under ±0.5% strain drives quartz far outside linear regime.
+- Quartz has a rigid silicate network that responds nonlinearly to large strain.
+- Berry-phase polarization becomes multi-valued; branch identification becomes unstable.
+- Correct calculation requires:
+  • much smaller strains (±0.2–0.3%),  
+  • clamped-ion reference,  
+  • multiple strain points with linear fit,  
+  • careful branch tracking.
