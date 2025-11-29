@@ -1,0 +1,23 @@
+Quartz e11 — Unrelaxed Berry-phase finite difference (±0.2%)
+
+P(0%) = -0.0778609 C/m²
+P(+0.2%) = +0.3962552 C/m²
+P(-0.2%) = -0.1182087 C/m²
+
+Central difference:
+e11 ≈ +128.60 C/m²
+
+Forward difference:
+e11 ≈ +237.06 C/m²
+
+Notes:
+
+Still wildly unphysical compared to the expected quartz e₁₁ ≈ +0.17 C/m².
+
+Even small ±0.2% strain produces large nonlinear jumps in Berry-phase polarization.
+
+Indicates branch switching and severe nonlinearity in polarization vs. strain.
+
+Confirms that simple finite-difference Berry-phase is not reliable for quartz.
+
+For weak piezoelectrics like quartz, DFPT or ultra-small strains (<0.05%) with explicit branch tracking is required.
