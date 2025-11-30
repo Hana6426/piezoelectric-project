@@ -1,0 +1,18 @@
+Quartz e11 — small-strain Berry finite difference (±0.05%, clamped ions)
+-----------------------------------------------------------------------
+
+P(0)         = -0.0778609  C/m^2
+P(-0.05%)    = -0.0939648  C/m^2
+P(+0.05%)    = -0.4012326  C/m^2
+
+Central finite-difference estimate:
+e11 ≈ [P(+ε) - P(-ε)] / (2ε)  with ε = 0.0005
+
+e11 ≈ -307.27 C/m^2
+
+Notes:
+- Result is unphysically large (expected |e11| ~ 0.1–0.2 C/m^2 from DFPT/experiment).
+- Structure is clamped (no internal relaxation under strain).
+- Even at ±0.05% strain, Berry-phase polarization appears to jump branches or exhibit strong nonlinearity.
+- Together with our ±0.2% and ±0.5% tests, this suggests that within our QE build/settings,
+  finite-difference Berry calculations for quartz e11 are not numerically robust.
