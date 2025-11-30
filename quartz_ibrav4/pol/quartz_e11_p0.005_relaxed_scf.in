@@ -1,0 +1,41 @@
+&control
+  calculation = 'scf',
+  prefix      = 'quartz_e11_p0.005_relaxed',
+  outdir      = './tmp_quartz_e11_p0.005_relaxed',
+  pseudo_dir  = './pseudos',
+/
+&system
+  ibrav      = 0,
+  nat        = 9,
+  ntyp       = 2,
+  ecutwfc    = 60,
+  ecutrho    = 480,
+  occupations= 'fixed',
+  input_dft  = 'LDA',
+/
+&electrons
+  conv_thr   = 1.0d-8,
+  mixing_beta= 0.3,
+/
+ATOMIC_SPECIES
+  Si  28.0855  Si.pz-vbc.UPF
+  O   15.9994  O.pz-van_ak.UPF
+
+CELL_PARAMETERS (angstrom)
+   5.031813   0.000000   0.000000
+  -2.515907   4.335998   0.000000
+   0.000000   0.000000   5.215118
+
+ATOMIC_POSITIONS (crystal)
+Si  0.2313040560  0.3201994505  0.0561569641
+Si  0.6615411732  0.1973766897  0.2885443638
+Si  0.2324294547  0.6431970108  0.5224466646
+O   0.2266388610  0.4783188794  0.7887309164
+O   0.3967163291  0.5636653091  0.2896650204
+O   0.4473427943  1.0146114155  0.5373210934
+O   0.4427107896  0.1614179449  0.0424528951
+O   0.8891794650  0.5375662133  0.4166471539
+O  -0.1144689129  0.0836990867  1.1578169383
+
+K_POINTS automatic
+  10 10 10  0 0 0

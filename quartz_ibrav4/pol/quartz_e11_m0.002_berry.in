@@ -1,0 +1,45 @@
+&control
+  calculation  = 'nscf',
+  restart_mode = 'from_scratch',
+  prefix       = 'quartz_e11_m0.002',
+  outdir       = './tmp_quartz_e11_m0.002',
+  pseudo_dir   = './pseudos',
+  lberry       = .true.,
+  gdir         = 1,
+  nppstr       = 8,
+/
+&system
+  ibrav       = 0,
+  nat         = 9,
+  ntyp        = 2,
+  ecutwfc     = 60,
+  ecutrho     = 480,
+  occupations = 'fixed',
+  input_dft   = 'LDA',
+/
+&electrons
+  conv_thr    = 1.0d-10,
+  mixing_beta = 0.3
+/
+K_POINTS automatic
+  10 10 10  0 0 0
+
+ATOMIC_SPECIES
+  Si  28.0855  Si.pz-vbc.UPF
+  O   15.9994  O.pz-van_ak.UPF
+
+CELL_PARAMETERS (angstrom)
+   4.996765   0.000000   0.000000
+  -2.498383   4.335998   0.000000
+   0.000000   0.000000   5.215118
+
+ATOMIC_POSITIONS (crystal)
+  Si  0.27247302  0.35922050  0.06230154
+  Si  0.63280906  0.11450123  0.26956680
+  Si  0.20246962  0.63150221  0.54327585
+  O   0.29017621  0.58618718  0.82953734
+  O   0.42382302  0.61668972  0.30520098
+  O   0.32037861  0.99201499  0.47415531
+  O   0.50200139  0.22107561  0.02012028
+  O   0.85056042  0.39428155  0.47326497
+  O  -0.08129734  0.08457901  1.12235894
