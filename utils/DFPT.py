@@ -39,22 +39,48 @@ def make_quartz_struc():
         spacegroup=152,  # P3_121
         cellpar=[a, a, c, 90, 90, 120]  # hexagonal cell parameters
     )
-    
-    
-    
-    
-    
-    
-    
-    # Save to CIF for visualization/checking
     structure = Struc(ase2struc(quartz_left))
     return structure
 
 
-def make_Pb_Ti_O_struc():
+def read_final_geometry(file_path):
     """
-    Creates the Perovskite crystal structure using ASE. NOTE: this version creates the structure but at the wrong lattice parameter.
-    Feel free to import this for now though to have something to test code with!
+    Reads cell parameters and atomic positions from hana's final geometry file
+    :param file_path: path to the geometry file
+    :return: lattice parameters as an array, atomic positions as a list of tuples, and atomic symbols as a list
+    """
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+    for line in lines:
+        if "CELL_PARAMETERS (angstrom)" in line:
+            cell_params = []
+            for i in range(3):
+                cell_params.append([float(x) for x in lines[lines.index(line)+1+i].strip().split()])
+        if "ATOMIC_POSITIONS" in line:
+            atomic_positions = []
+            atomic_symbols = []
+            for pos_line in lines[lines.index(line)+1:]:
+                if pos_line.strip() == "":
+                    break
+                parts = pos_line.strip().split()
+                atomic_symbols.append(parts[0])
+                atomic_positions.append([float(x) for x in parts[1:]])
+    return numpy.array(cell_params), atomic_positions, atomic_symbols
+
+
+def make_quartz_final():
+    """
+    Creates the relaxed quartz crystal structure using ASE. Uses numbers from Hana's final geometry file.
+    :return: structure object converted from ase
+    """
+    cell_params, atomic_positions, atomic_symbols = read_final_geometry('quartz_final_geometry.txt')
+    quartz_final = Atoms(symbols=atomic_symbols, positions=atomic_positions, cell=cell_params, pbc=True)
+    structure = Struc(ase2struc(quartz_final))
+    return structure
+
+def make_Pb_Ti_O3_struc():
+    """
+    Creates the Perovskite crystal structure using ASE.
     :param alat: Lattice parameter in angstrom
     :return: structure object converted from ase
     running DFT revealed: a = 3.860676393, c = 4.054793487
@@ -91,10 +117,10 @@ def psuedos(molecule):
     elif molecule == "PbTiO3":
         pseudopots = {
             "Pb": PseudoPotential(
-                ptype="uspp", element="Pb", functional="LDA", name="Pb.pz-dn-rrkjus.UPF"
+                ptype="uspp", element="Pb", functional="LDA", name="Pb.pz-d-van.UPF"
             ),
             "Ti": PseudoPotential(
-                ptype="uspp", element="Ti", functional="LDA", name="Ti.pz-n-rrkjus.UPF"
+                ptype="uspp", element="Ti", functional="LDA", name="Ti.pz-sp-van_ak.UPF"
             ),
             "O": PseudoPotential(
                 ptype="uspp", element="O", functional="LDA", name="O.pz-rrkjus.UPF"
@@ -118,10 +144,10 @@ def run_scf(molecule, nk = None, ecut = None, ncpu = 4):
 
     pseudopots = psuedos(molecule) #just returns the right pseudoss, moved out for clarity
     if molecule == "quartz":
-        struc = make_quartz_struc()
+        struc = make_quartz_final()
         nk = 10 if nk is None else nk  # default k-point grid size
     elif molecule == "PbTiO3":
-        struc = make_PbTiO3_struc()
+        struc = make_Pb_Ti_O3_struc()
         nk = 8 if nk is None else nk  # default k-point grid size
     kpts = Kpoints(gridsize=[nk, nk, nk], option="automatic", offset=True)
 
@@ -194,7 +220,7 @@ def run_qe_ph(molecule, ncpu=4):
     return os.path.join(runpath.path, 'ph.out')
 
 
-def parse_output(molecule):
+def parse_phonon_output(molecule):
     outfile = os.path.join(os.getcwd(), f"{molecule}_scf", "ph.out")
     with open(outfile, "r") as outf:
         for line in outf:

@@ -1,13 +1,13 @@
 &CONTROL
     calculation = 'scf'
     pseudo_dir = '/home/bond/Software/QE/qe-7.4.1/pseudo'
-    outdir = './quartz_scf'
+    outdir = '/home/bond/piezoelectric-project/quartz/dfpt/quartz_scf'
     tstress = .true.
     tprnfor = .true.
 / 
 &SYSTEM
-    ecutwfc = 50
-    ecutrho = 400
+    ecutwfc = 60
+    ecutrho = 480
     input_dft = 'LDA'
     ntyp = 2
     nat = 9
@@ -24,21 +24,21 @@
 &CELL
 / 
 K_POINTS {automatic}
- 6 6 6  1 1 1
+ 10 10 10  1 1 1
 ATOMIC_SPECIES
   O 15.999 O.pz-rrkjus.UPF
   Si 28.085 Si_r.upf
 CELL_PARAMETERS {angstrom}
- 4.916 0.0 0.0
- -2.4579999999999993 4.257380885004301 0.0
- 0.0 0.0 5.405
+ 5.006779 0.0 0.0
+ -2.50339 4.335998 0.0
+ 0.0 0.0 5.215118
 ATOMIC_POSITIONS {angstrom}
-  Si 1.30542 2.26105 0.00000
-  Si 2.30517 0.00000 1.80167
-  Si -1.15258 1.99633 3.60333
-  O 0.30738 1.75998 4.24234
-  O 0.78013 3.64359 0.63900
-  O -1.08751 3.11120 2.44067
-  O 1.37049 1.14618 1.16266
-  O 2.76538 2.49741 4.76600
-  O 3.23813 0.61379 2.96433
+  Si 0.27247 0.35922 0.06230
+  Si 0.63281 0.11450 0.26957
+  Si 0.20247 0.63150 0.54328
+  O 0.29018 0.58619 0.82954
+  O 0.42382 0.61669 0.30520
+  O 0.32038 0.99201 0.47416
+  O 0.50200 0.22108 0.02012
+  O 0.85056 0.39428 0.47326
+  O -0.08130 0.08458 1.12236
