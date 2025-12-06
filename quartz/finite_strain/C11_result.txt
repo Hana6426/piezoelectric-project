@@ -1,5 +1,0 @@
-Quartz: E0 = -216.94157910 Ry
-        Ep = -216.94163844 Ry  ( +0.5% strain )
-        Em = -216.94108468 Ry  ( -0.5% strain )
-        V0 = 112.3577 Å^3
-Estimated C11 ≈ 337.64 GPa
