@@ -1,0 +1,49 @@
+&CONTROL
+    calculation = 'nscf'
+    pseudo_dir = '/home/bond/Software/QE/qe-7.4.1/pseudo'
+    outdir = '/home/bond/piezoelectric-project/PBEsol/quartzPBE/SiO2_nk6_ecut60_relaxation/strains/xx_strain_-0.0100'
+    tstress = .true.
+    tprnfor = .true.
+    lberry = .true.
+    disk_io = 'none'
+    gdir = 1
+    nppstr = 10
+/ 
+&SYSTEM
+    ecutwfc = 60
+    ecutrho = 480
+    input_dft = 'PBEsol'
+    ntyp = 2
+    nat = 9
+    ibrav = 0
+/ 
+&ELECTRONS
+    diagonalization = 'david'
+    mixing_beta = 0.7
+    conv_thr = 1e-07
+/ 
+&IONS
+    ion_dynamics = 'bfgs'
+/ 
+&CELL
+    cell_dofree = 'none'
+/ 
+K_POINTS {automatic}
+ 6 6 6  1 1 1
+ATOMIC_SPECIES
+  O 15.999 O.pbesol-n-kjpaw_psl.1.0.0.UPF
+  Si 28.085 Si.pbesol-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS {angstrom}
+ 4.89554748936 0.0 0.0
+ -2.44777374468 4.282493426 0.0
+ 0.0 0.0 5.441157992
+ATOMIC_POSITIONS {angstrom}
+  Si 1.30908 2.27203 -0.00012
+  Si 2.30718 -0.00370 1.82161
+  Si -1.14026 2.01254 3.61787
+  O 0.31675 1.76767 4.27020
+  O 0.79294 3.66493 0.63583
+  O -1.09203 3.13689 2.45049
+  O 1.37494 1.15401 1.17283
+  O 2.76820 2.52070 4.81376
+  O 3.25322 0.60493 2.98216

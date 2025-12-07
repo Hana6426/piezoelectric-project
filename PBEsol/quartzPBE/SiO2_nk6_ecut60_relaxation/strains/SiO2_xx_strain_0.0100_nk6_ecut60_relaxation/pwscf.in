@@ -1,0 +1,45 @@
+&CONTROL
+    calculation = 'relax'
+    pseudo_dir = '/home/bond/Software/QE/qe-7.4.1/pseudo'
+    outdir = 'SiO2_nk6_ecut60_relaxation/strains/SiO2_xx_strain_0.0100_nk6_ecut60_relaxation'
+    tstress = .true.
+    tprnfor = .true.
+/ 
+&SYSTEM
+    ecutwfc = 60
+    ecutrho = 480
+    input_dft = 'PBEsol'
+    ntyp = 2
+    nat = 9
+    ibrav = 0
+/ 
+&ELECTRONS
+    diagonalization = 'david'
+    mixing_beta = 0.7
+    conv_thr = 1e-07
+/ 
+&IONS
+    ion_dynamics = 'bfgs'
+/ 
+&CELL
+    cell_dofree = 'none'
+/ 
+K_POINTS {automatic}
+ 6 6 6  1 1 1
+ATOMIC_SPECIES
+  O 15.999 O.pbesol-n-kjpaw_psl.1.0.0.UPF
+  Si 28.085 Si.pbesol-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS {angstrom}
+ 4.99444743864 0.0 0.0
+ -2.49722371932 4.282493426 0.0
+ 0.0 0.0 5.441157992
+ATOMIC_POSITIONS {angstrom}
+  Si 1.31379 2.27556 0.00000
+  Si 2.31742 -0.00000 1.81372
+  Si -1.15870 2.00694 3.62744
+  O 0.30970 1.76651 4.26718
+  O 0.78781 3.66745 0.63974
+  O -1.09751 3.13104 2.45346
+  O 1.37499 1.15146 1.17398
+  O 2.78220 2.51599 4.80142
+  O 3.26031 0.61505 2.98770

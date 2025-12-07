@@ -1,0 +1,11 @@
+&inputph
+    prefix = 'pwscf'
+    outdir = '/home/bond/piezoelectric-project/pzt/dfpt/PbTiO3_scf'
+    tr2_ph = 1.0d-14
+    fildyn = 'matdyn_G'
+    ldisp = .false.
+    epsil = .true.
+    zue = .true.
+    /
+    0.0 0.0 0.0
+    

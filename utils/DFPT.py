@@ -104,28 +104,51 @@ def make_Pb_Ti_O3_struc():
     structure = Struc(ase2struc(perov))
     return structure
 
-def psuedos(molecule):
-    if molecule == "quartz":
-        pseudopots = {
-            "Si": PseudoPotential(
-                ptype="uspp", element="Si", functional="LDA", name="Si_r.upf"
-            ),
-            "O": PseudoPotential(
-                ptype="uspp", element="O", functional="LDA", name="O.pz-rrkjus.UPF"
-            ),
-        }
-    elif molecule == "PbTiO3":
-        pseudopots = {
-            "Pb": PseudoPotential(
-                ptype="uspp", element="Pb", functional="LDA", name="Pb.pz-d-van.UPF"
-            ),
-            "Ti": PseudoPotential(
-                ptype="uspp", element="Ti", functional="LDA", name="Ti.pz-sp-van_ak.UPF"
-            ),
-            "O": PseudoPotential(
-                ptype="uspp", element="O", functional="LDA", name="O.pz-rrkjus.UPF"
-            ),
-        }
+def pseudos(molecule, functional="LDA"):
+    if functional == "LDA":
+        if molecule == "quartz":
+            pseudopots = {
+                "Si": PseudoPotential(
+                    ptype="uspp", element="Si", functional="LDA", name="Si_r.upf"
+                ),
+                "O": PseudoPotential(
+                    ptype="uspp", element="O", functional="LDA", name="O.pz-rrkjus.UPF"
+                ),
+            }
+        elif molecule == "PbTiO3":
+            pseudopots = {
+                "Pb": PseudoPotential(
+                    ptype="uspp", element="Pb", functional="LDA", name="Pb.pz-d-van.UPF"
+                ),
+                "Ti": PseudoPotential(
+                    ptype="uspp", element="Ti", functional="LDA", name="Ti.pz-sp-van_ak.UPF"
+                ),
+                "O": PseudoPotential(
+                    ptype="uspp", element="O", functional="LDA", name="O.pz-rrkjus.UPF"
+                ),
+            }
+    elif functional == "PBEsol":
+        if molecule == "quartz":
+            pseudopots = {
+                "Si": PseudoPotential(
+                    ptype="uspp", element="Si", functional="PBEsol", name="Si.pbesol-n-rrkjus_psl.1.0.0.UPF"
+                ),
+                "O": PseudoPotential(
+                    ptype="uspp", element="O", functional="PBEsol", name="O.pbesol-n-rrkjus_psl.1.0.0.UPF"
+                ),
+            }
+        elif molecule == "PbTiO3":
+            pseudopots = {
+                "Pb": PseudoPotential(
+                    ptype="uspp", element="Pb", functional="PBEsol", name="Pb.pbesol-dn-rrkjus_psl.1.0.0.UPF"
+                ),
+                "Ti": PseudoPotential(
+                    ptype="uspp", element="Ti", functional="PBEsol", name="Ti.pbesol-spn-rrkjus_psl.1.0.0.UPF"
+                ),
+                "O": PseudoPotential(
+                    ptype="uspp", element="O", functional="PBEsol", name="O.pbesol-n-rrkjus_psl.1.0.0.UPF"
+                ),
+            }
     return pseudopots
 
 
@@ -145,10 +168,10 @@ def run_scf(molecule, nk = None, ecut = None, ncpu = 4):
     pseudopots = psuedos(molecule) #just returns the right pseudoss, moved out for clarity
     if molecule == "quartz":
         struc = make_quartz_final()
-        nk = 10 if nk is None else nk  # default k-point grid size
+        nk = 8 if nk is None else nk  # default k-point grid size
     elif molecule == "PbTiO3":
         struc = make_Pb_Ti_O3_struc()
-        nk = 8 if nk is None else nk  # default k-point grid size
+        nk = 6 if nk is None else nk  # default k-point grid size
     kpts = Kpoints(gridsize=[nk, nk, nk], option="automatic", offset=True)
 
     runpath = Dir(path=os.path.join(os.getcwd(), f"{molecule}_scf")) #keeping labutils Dir object structure
@@ -211,7 +234,7 @@ def generate_phonon_input(path):
 def run_qe_ph(molecule, ncpu=4):
     # Use the same command that works from terminal
     ph_command = f'mpirun -np {ncpu} ph.x < ph.in > ph.out'
-    runpath = Dir(path=os.path.join(os.getcwd(), f"{molecule}_scf")) #assumes running from parent directory of scf folder
+    runpath = Dir(path = os.getcwd()) #assumes running from directory of scf folder
     #check if phonon input file exists, if not generate it
     ph_in_path = os.path.join(runpath.path, "ph.in")
     if not os.path.isfile(ph_in_path):
@@ -221,7 +244,7 @@ def run_qe_ph(molecule, ncpu=4):
 
 
 def parse_phonon_output(molecule):
-    outfile = os.path.join(os.getcwd(), f"{molecule}_scf", "ph.out")
+    outfile = os.path.join(os.getcwd(), "ph.out")
     with open(outfile, "r") as outf:
         for line in outf:
             if line.startswith("          Dielectric constant in cartesian axis"):
