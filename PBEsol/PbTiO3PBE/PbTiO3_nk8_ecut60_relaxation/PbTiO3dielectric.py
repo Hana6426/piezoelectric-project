@@ -9,7 +9,7 @@ from utils.DFPT import run_qe_ph
 
 
 
-molecule = 'quartz'
+molecule = 'PbTiO3'
 ncpu = 4   # Number of processors to use
 
 ph_outpath = run_qe_ph(molecule, ncpu=ncpu)

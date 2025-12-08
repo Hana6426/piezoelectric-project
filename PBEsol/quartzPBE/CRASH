@@ -1,0 +1,14 @@
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     task #         0
+     from davcio : error #        10
+     error reading file "/home/bond/piezoelectric-project/PBEsol/quartzPBE/SiO2_nk10_ecut60_relaxation/strains/xx_strain_-0.0100/pwscf.wfc1"
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     task #         1
+     from davcio : error #        10
+     error reading file "/home/bond/piezoelectric-project/PBEsol/quartzPBE/SiO2_nk10_ecut60_relaxation/strains/xx_strain_-0.0100/pwscf.wfc2"
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

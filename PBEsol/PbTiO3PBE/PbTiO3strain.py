@@ -12,7 +12,7 @@ path = "/home/bond/piezoelectric-project/PBEsol/PbTiO3PBE/PbTiO3_nk8_ecut60_rela
 
 # Apply strain and relax
 strain_type = "zz"
-magnitude = 0.01
-#Strain.strain_and_relax(runfile, material, functional, strain_type, magnitude, path, nk, ecut)
+magnitude = -0.005
+Strain.strain_and_relax(runfile, material, functional, strain_type, magnitude, path, nk, ecut)
 # Run Berry phase calculation
-Strain.Berry_phase_calculation(path + "zz_strain_0.0100", material, functional, nk, ecut)
+Strain.Berry_phase_calculation(path + "zz_strain_-0.0050", material, functional, nk, ecut)

@@ -33,7 +33,7 @@ def relax_structure_dft(material, functional, nk, ecut, path):
         raise ValueError("Unsupported material: {}".format(material))
     
     kpts = Kpoints(gridsize=[nk, nk, nk], option="automatic", offset=True)
-    dirname = "SiO2_nk{}_ecut{}_relaxation".format(nk, ecut)
+    dirname = "{}_nk{}_ecut{}_relaxation".format(material, nk, ecut)
     runpath = Dir(path=os.path.join(path, dirname))
     input_params = PWscf_inparam(
         {

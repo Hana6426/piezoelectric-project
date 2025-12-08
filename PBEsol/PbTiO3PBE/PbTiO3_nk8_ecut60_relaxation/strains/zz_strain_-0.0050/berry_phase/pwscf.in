@@ -1,0 +1,46 @@
+&CONTROL
+    calculation = 'nscf'
+    pseudo_dir = '/home/bond/Software/QE/qe-7.4.1/pseudo'
+    outdir = '/home/bond/piezoelectric-project/PBEsol/PbTiO3PBE/PbTiO3_nk8_ecut60_relaxation/strains/zz_strain_-0.0050'
+    tstress = .true.
+    tprnfor = .true.
+    lberry = .true.
+    disk_io = 'none'
+    gdir = 1
+    nppstr = 10
+/ 
+&SYSTEM
+    ecutwfc = 60
+    ecutrho = 480
+    input_dft = 'PBEsol'
+    ntyp = 3
+    nat = 5
+    ibrav = 0
+/ 
+&ELECTRONS
+    diagonalization = 'david'
+    mixing_beta = 0.7
+    conv_thr = 1e-07
+/ 
+&IONS
+    ion_dynamics = 'bfgs'
+/ 
+&CELL
+    cell_dofree = 'none'
+/ 
+K_POINTS {automatic}
+ 8 8 8  1 1 1
+ATOMIC_SPECIES
+  O 15.999 O.pbesol-n-rrkjus_psl.1.0.0.UPF
+  Pb 207.2 Pb.pbesol-dn-rrkjus_psl.1.0.0.UPF
+  Ti 47.867 Ti.pbesol-spn-rrkjus_psl.1.0.0.UPF
+CELL_PARAMETERS {angstrom}
+ 3.876363004 0.0 0.0
+ 0.0 3.876363004 0.0
+ 0.0 0.0 3.9907155639450003
+ATOMIC_POSITIONS {angstrom}
+  Pb 0.00000 0.00000 0.00014
+  Ti 1.93818 1.93818 2.00527
+  O 0.00000 1.93818 2.00463
+  O 1.93818 0.00000 2.00463
+  O 1.93818 1.93818 0.00149

@@ -1,0 +1,44 @@
+&CONTROL
+    calculation = 'vc-relax'
+    pseudo_dir = '/home/bond/Software/QE/qe-7.4.1/pseudo'
+    outdir = '/home/bond/piezoelectric-project/PBEsol/PbTiO3PBE/SiO2_nk8_ecut60_relaxation'
+    tstress = .true.
+    tprnfor = .true.
+    disk_io = 'none'
+/ 
+&SYSTEM
+    ecutwfc = 60
+    ecutrho = 480
+    input_dft = 'PBEsol'
+    ibrav = 0
+    ntyp = 3
+    nat = 5
+/ 
+&ELECTRONS
+    diagonalization = 'david'
+    mixing_beta = 0.7
+    conv_thr = 1e-07
+/ 
+&IONS
+    ion_dynamics = 'bfgs'
+/ 
+&CELL
+    cell_dynamics = 'bfgs'
+    cell_dofree = 'ibrav'
+/ 
+K_POINTS {automatic}
+ 8 8 8  1 1 1
+ATOMIC_SPECIES
+  O 15.999 O.pbesol-n-rrkjus_psl.1.0.0.UPF
+  Pb 207.2 Pb.pbesol-dn-rrkjus_psl.1.0.0.UPF
+  Ti 47.867 Ti.pbesol-spn-rrkjus_psl.1.0.0.UPF
+CELL_PARAMETERS {angstrom}
+ 3.860676393 0.0 0.0
+ 0.0 3.860676393 0.0
+ 0.0 0.0 4.054793487
+ATOMIC_POSITIONS {angstrom}
+  Pb 0.00000 0.00000 0.00000
+  Ti 1.93034 1.93034 2.02740
+  O 0.00000 1.93034 2.02740
+  O 1.93034 0.00000 2.02740
+  O 1.93034 1.93034 0.00000
